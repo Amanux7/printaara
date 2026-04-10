@@ -1,0 +1,476 @@
+@import "tailwindcss";
+
+/* =====================================================
+   PRINTAARA — EDITORIAL DARK DESIGN SYSTEM v2
+   Palette: Obsidian / Deep Violet / Warm Amber
+   ===================================================== */
+
+:root {
+  /* ─── Core Background Scale ───────────────────────── */
+  --bg-void:      #06050F;   /* deepest — page bg */
+  --bg-base:      #0A0918;   /* base surface */
+  --bg-raised:    #100F20;   /* cards, panels */
+  --bg-overlay:   #17152D;   /* hover states, modals */
+  --bg-border:    #211F3A;   /* subtle borders */
+  --bg-border-hi: #322F58;   /* highlighted borders */
+
+  /* ─── Primary Brand — Deep Violet ────────────────── */
+  --violet-50:  #F5F3FF;
+  --violet-100: #EDE9FE;
+  --violet-300: #C4B5FD;
+  --violet-400: #A78BFA;
+  --violet-500: #8B5CF6;   /* primary interactive */
+  --violet-600: #7C3AED;   /* primary hover */
+  --violet-700: #6D28D9;   /* pressed state */
+  --violet-900: #2E1065;
+
+  /* ─── Accent — Warm Amber (the differentiator) ────── */
+  --amber-300: #FCD34D;
+  --amber-400: #FBBF24;
+  --amber-500: #F59E0B;   /* accent */
+  --amber-600: #D97706;
+
+  /* ─── Semantic Colours ────────────────────────────── */
+  --success:   #10B981;
+  --warning:   #F59E0B;
+  --error:     #EF4444;
+  --info:      #6366F1;
+
+  /* ─── Text Scale ──────────────────────────────────── */
+  --text-bright:    #EEEAF8;   /* headings */
+  --text-primary:   #C9C5DC;   /* body */
+  --text-secondary: #8A859E;   /* captions */
+  --text-muted:     #4E4A63;   /* placeholders */
+
+  /* ─── Shadows / Glows (restrained) ───────────────── */
+  --glow-violet: 0 0 24px rgba(139, 92, 246, 0.35);
+  --glow-amber:  0 0 24px rgba(245, 158, 11, 0.35);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.6);
+
+  /* ─── Border Radius ───────────────────────────────── */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-2xl: 32px;
+
+  /* ─── Spacing (8pt grid) ─────────────────────────── */
+  --sp-1:   8px;
+  --sp-2:  16px;
+  --sp-3:  24px;
+  --sp-4:  32px;
+  --sp-5:  40px;
+  --sp-6:  48px;
+  --sp-8:  64px;
+  --sp-10: 80px;
+  --sp-12: 96px;
+  --sp-16: 128px;
+
+  /* ─── Legacy aliases (keeps old classes working) ──── */
+  --neon-purple: var(--violet-500);
+  --neon-cyan:   #06B6D4;
+  --neon-pink:   #EC4899;
+  --neon-yellow: var(--amber-500);
+  --neon-green:  var(--success);
+  --bg-dark:     var(--bg-void);
+  --bg-card:     var(--bg-raised);
+  --bg-elevated: var(--bg-overlay);
+
+  --background: var(--bg-void);
+  --foreground: var(--text-bright);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/* =====================================================
+   RESET & BASE
+   ===================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--violet-700);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--violet-500); }
+
+/* =====================================================
+   TYPOGRAPHY SCALE
+   ===================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-bright);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4.5rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+
+p { color: var(--text-primary); }
+
+/* =====================================================
+   CONTAINER — Honest gutters
+   ===================================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: clamp(20px, 5vw, 48px);
+  padding-right: clamp(20px, 5vw, 48px);
+}
+
+/* =====================================================
+   GLASS / SURFACES
+   ===================================================== */
+.glass {
+  background: rgba(16, 15, 32, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--bg-border);
+}
+
+.glass-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card-hi {
+  background: var(--bg-raised);
+  border: 1px solid var(--bg-border-hi);
+  border-radius: var(--radius-lg);
+}
+
+/* =====================================================
+   GRADIENT TEXT — Editorial approach
+   ===================================================== */
+.gradient-text {
+  background: linear-gradient(120deg, var(--violet-400) 0%, var(--violet-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* The signature amber accent — used SPARINGLY */
+.gradient-text-amber {
+  background: linear-gradient(120deg, var(--amber-500) 0%, var(--amber-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-pink {
+  background: linear-gradient(120deg, #EC4899 0%, var(--violet-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Shimmer (hero only) ─────────── */
+.shimmer-text {
+  background: linear-gradient(
+    100deg,
+    var(--violet-400) 0%,
+    var(--amber-400)  30%,
+    var(--violet-300) 60%,
+    var(--amber-400)  80%,
+    var(--violet-400) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* =====================================================
+   GRADIENT BORDER UTILITY
+   ===================================================== */
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius-lg);
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--violet-500), var(--amber-500));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* =====================================================
+   BUTTONS — Precise, intentional
+   ===================================================== */
+.btn-neon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: var(--violet-600);
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--violet-500);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn-neon:hover {
+  background: var(--violet-500);
+  box-shadow: var(--glow-violet), 0 4px 16px rgba(0,0,0,0.4);
+  transform: translateY(-1px);
+}
+.btn-neon:active { transform: translateY(0); }
+
+/* Amber CTA — the standout button */
+.btn-amber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: var(--amber-500);
+  color: #0A0918;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-amber:hover {
+  background: var(--amber-400);
+  box-shadow: var(--glow-amber);
+  transform: translateY(-1px);
+}
+.btn-amber:active { transform: translateY(0); }
+
+.btn-outline-neon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 27px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid var(--bg-border-hi);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outline-neon:hover {
+  border-color: var(--violet-500);
+  color: var(--violet-300);
+  background: rgba(139, 92, 246, 0.07);
+}
+
+/* =====================================================
+   SECTION LABEL — small caps eyebrow
+   ===================================================== */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--violet-400);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* =====================================================
+   PRODUCT CARD — Elevated surface, not a box
+   ===================================================== */
+.product-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+}
+.product-card:hover {
+  border-color: var(--bg-border-hi);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139,92,246,0.12);
+  transform: translateY(-3px);
+}
+
+/* =====================================================
+   FORM ELEMENTS
+   ===================================================== */
+.input-neon {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-base);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-md);
+  color: var(--text-bright);
+  font-family: "Outfit", sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.input-neon:focus {
+  border-color: var(--violet-500);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+.input-neon::placeholder { color: var(--text-muted); }
+
+/* =====================================================
+   BADGES — Status indicators
+   ===================================================== */
+.badge-processing {
+  padding: 4px 12px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 99px;
+  font-size: 0.72rem; font-weight: 600;
+  color: var(--amber-400);
+}
+.badge-shipped {
+  padding: 4px 12px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 99px;
+  font-size: 0.72rem; font-weight: 600;
+  color: #818CF8;
+}
+.badge-delivered {
+  padding: 4px 12px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 99px;
+  font-size: 0.72rem; font-weight: 600;
+  color: var(--success);
+}
+
+/* =====================================================
+   GLOW UTILITIES — used sparingly
+   ===================================================== */
+.glow-purple { box-shadow: var(--glow-violet); }
+.glow-amber  { box-shadow: var(--glow-amber); }
+.glow-cyan   { box-shadow: 0 0 24px rgba(6, 182, 212, 0.3); }
+.glow-pink   { box-shadow: 0 0 24px rgba(236, 72, 153, 0.3); }
+
+.text-glow-purple { text-shadow: 0 0 24px rgba(139, 92, 246, 0.6); }
+.text-glow-amber  { text-shadow: 0 0 24px rgba(245, 158, 11, 0.6); }
+
+/* =====================================================
+   KEYFRAMES
+   ===================================================== */
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes bounce-in {
+  0%   { transform: scale(0.4); opacity: 0; }
+  65%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float      { animation: float 4.5s ease-in-out infinite; }
+.animate-bounce-in  { animation: bounce-in 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) forwards; }
+.animate-spin-slow  { animation: spin-slow 22s linear infinite; }
+.animate-fade-up    { animation: fade-up 0.6s ease-out forwards; }
+.animate-pulse-glow { animation: pulse-ring 2s ease-out infinite; }
+
+/* =====================================================
+   SECTION SPACING — consistent sections
+   ===================================================== */
+.section-pad {
+  padding-top: clamp(96px, 10vw, 160px);
+  padding-bottom: clamp(96px, 10vw, 160px);
+}
+
+.section-pad-sm {
+  padding-top: clamp(64px, 7vw, 104px);
+  padding-bottom: clamp(64px, 7vw, 104px);
+}
+
+/* =====================================================
+   DIVIDER
+   ===================================================== */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bg-border-hi), transparent);
+}
